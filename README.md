@@ -1,4 +1,4 @@
-# Project Name
+# Break IT - a playwright with javascript project
 
 ## Table of Contents
 - [Introduction](#introduction)
