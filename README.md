@@ -6,6 +6,7 @@
 - [Project Description](#project-description)
 - [Playwright and JavaScript](#playwright-and-javascript)
 - [Page Object Model Pattern](#page-object-model-pattern)
+- [GitHub Actions](#github-actions)
 
 ## Introduction
 This is a project created by the members of Bug Hunter discord server. 
@@ -32,3 +33,5 @@ This project utilizes [Playwright](https://playwright.dev/), a tool for automati
 ## Page Object Model Pattern
 We follow the Page Object Model [(POM)](https://playwright.dev/docs/pom) pattern to maintain our tests. POM helps in creating an abstraction of the UI elements, making tests more maintainable and reducing duplication by separating page-specific locators and actions into reusable modules.
 
+## GitHub Actions
+This project uses GitHub Actions for continuous integration. Tests are automatically run using GitHub Actions upon each push or pull request. The configuration for running Playwright tests in GitHub Actions can be found in the `.github/workflows` directory.
