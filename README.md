@@ -24,7 +24,7 @@ We estimate that our project will be done in about 2-3 months.
 - [Ema Emese Egeto](https://github.com/emese85)
 - [Claudiu Iacob](https://github.com/iclaudiu98)
 - [Adrian Ciuciui](https://github.com/AdrianCiuciui)
-- [Mirel](#)
+- [Mirel P](https://github.com/pmirel)
 
 ## Project Description
 The purpose of this project is to polish our quality assurance automation skills on [Playwright](https://playwright.dev/) and Javascript, as well as understanding and following best practices in workflows and coding.
