@@ -1,0 +1,14 @@
+{
+  "name": "break-it-playwright-javascript-project",
+  "version": "1.0.0",
+  "description": "- [Introduction](#introduction)\r - [Contributors](#contributors)\r - [Project Description](#project-description)\r - [Playwright and JavaScript](#playwright-and-javascript)\r - [Page Object Model Pattern](#page-object-model-pattern)\r - [GitHub Actions](#github-actions)",
+  "main": "index.js",
+  "scripts": {},
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@playwright/test": "^1.40.0",
+    "@types/node": "^20.9.3"
+  }
+}
