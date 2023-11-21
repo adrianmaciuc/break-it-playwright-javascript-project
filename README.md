@@ -15,7 +15,7 @@ We estimate that our project will be done in about 2-3 months.
 ## Contributors
 - [Andu Tutoveanu](https://github.com/AnduTutoveanu09)
 - [Alex Stefan](https://github.com/AlexStefan17)
-- [Levi Simon](https://github.com/simonleventeattila)
+- [Levi - Simon Levente-Attila](https://github.com/simonleventeattila)
 - [Radu Moldovan](https://github.com/RaduMoldovan30)
 - [Iulian Neaga](https://github.com/Iulian99)
 - [Andreea Hasel](https://github.com/AndreeaHasel)
