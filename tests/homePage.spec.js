@@ -18,4 +18,17 @@ test('count products on the home page', async ({ page }) => {
     expect(numberOfProducts).toBe(6)
 });
 
+test('Select random products from home page', async ({ page }) => {
+    await page.goto('https://magento.softwaretestingboard.com/')
+  
+    const numberOfProducts = await page.$$('.product-item');
+    const randomProduct = numberOfProducts[Math.floor(Math.random() * numberOfProducts.length)];
+    const randomTitleBeforeClick = await randomProduct.evaluate(product => product.querySelector('.product-item-link').textContent.trim());
+    const titleName = randomTitleBeforeClick;
+    await randomProduct.click();
 
+  
+    const randomTitleAfterRedirect = await page.evaluate(() => document.querySelector('span[data-ui-id="page-title-wrapper"][itemprop="name"]').textContent.trim());
+    expect(randomTitleAfterRedirect).toEqual(titleName);
+    console.log('The title name is the same:', randomTitleAfterRedirect === randomTitleBeforeClick);
+  });
