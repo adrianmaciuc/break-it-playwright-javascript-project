@@ -1,4 +1,7 @@
+<<<<<<< HEAD
 // @ts-check
+=======
+>>>>>>> e2a7366 (updated import and comments)
 import { test, expect } from "@playwright/test";
 
 test("Six items displayed at hot sellers", async ({ page }) => {
@@ -21,10 +24,10 @@ test("Item redirects correctly on home page", async ({ page }) => {
     // Go to item`s page
     await updatedProductItems[item].click();
 
-    // get the name of the item
+    // Get the name of the item
     const nameItemsPage = await page.locator("span.base").innerText();
 
-    // get the price of the item
+    // Get the price of the item
     const priceItemPage = await page.locator(".product-info-main .price");
 
     expect(nameItemsPage).toContain(nameItems[item]);

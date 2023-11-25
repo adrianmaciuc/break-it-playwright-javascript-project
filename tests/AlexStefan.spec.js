@@ -1,4 +1,7 @@
+<<<<<<< HEAD
 // @ts-check
+=======
+>>>>>>> e2a7366 (updated import and comments)
 import { test, expect } from "@playwright/test";
 
 test("has title", async ({ page }) => {
