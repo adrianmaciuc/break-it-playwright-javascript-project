@@ -31,5 +31,5 @@ test('count products on the home page', async ({ page }) => {
     console.log('Number of products on the home page is:', numberOfProducts);
 
     // Expect the number of products to be greater than 0
-    expect(numberOfProducts).toHaveLength(6)
+    expect(numberOfProducts).toBe(6)
 });
