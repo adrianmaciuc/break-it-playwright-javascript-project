@@ -37,3 +37,6 @@ We follow the Page Object Model [(POM)](https://playwright.dev/docs/pom) pattern
 
 ## GitHub Actions
 This project uses GitHub Actions for continuous integration. Tests are automatically run using GitHub Actions upon each push or pull request. The configuration for running Playwright tests in GitHub Actions can be found in the `.github/workflows` directory.
+
+## Application Under Test
+https://magento.softwaretestingboard.com/
