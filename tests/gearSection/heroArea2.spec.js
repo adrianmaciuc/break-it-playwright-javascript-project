@@ -9,5 +9,5 @@ test("Gear section hero images-1", async ({ page }) => {
 test("Gear section hero images-2", async ({ page }) => {
   await page.goto("https://magento.softwaretestingboard.com/gear.html");
   await page.locator(".block-promo.gear-category-watches").click();
-  await expect(page.url()).toContain("watches");
+  await expect(page.locator(".base")).toHaveText("Watches");
 });
