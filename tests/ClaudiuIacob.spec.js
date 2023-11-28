@@ -7,7 +7,7 @@ test('Verify if only four lumas items are listed on whats new page', async ({ pa
   await expect(products).toHaveCount(4);
 });
 
-test('Verify if I am on the what is new page and I click on the Stellar solar jacket from latest lumas I am redirect to page../stellar-solar-jacket.html.', async ({ page }) => {
+test('Verify if by Clicking on  Stellar Solar Jacket the page is redirect to the clicked product', async ({ page }) => {
   await page.goto('https://magento.softwaretestingboard.com/what-is-new.html');
   await expect(page).toHaveURL(/what-is-new/);
   await page.getByText('Stellar Solar Jacket').click()
