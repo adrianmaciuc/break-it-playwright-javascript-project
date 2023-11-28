@@ -13,31 +13,36 @@ test("Simple Compare 2 items", async ({ page }) => {
   async function hoverAndCompare(product) {
     await product.hover();
     await page.waitForTimeout(1500);
-    const childElement = await product.$(".action.tocompare");
-    await childElement.click();
+    await product.locator(".action.tocompare").click();
   }
 
-  const itemList = await page.$$(".products.list.items.product-items li");
+  const parentLocator = await page.locator(
+    ".products.list.items.product-items"
+  );
+  const childElements = await parentLocator
+    .locator(".item.product.product-item")
+    .all();
   const productsName = [];
 
   // Select and compare the first product
-  const selectedProduct1 = selectRandomProduct(itemList);
-  const productName = await (
-    await selectedProduct1.$(".product-item-link")
-  ).innerText();
+  const selectedProduct1 = selectRandomProduct(childElements);
+  const productName = await selectedProduct1
+    .locator(".product-item-link")
+    .innerText();
   productsName.push(productName);
   await hoverAndCompare(selectedProduct1);
 
   // Get the product list after the reload
-  const itemListAfterReload = await page.$$(
-    ".products.list.items.product-items li"
-  );
+  await parentLocator.waitFor();
+  const childElementsReload = await parentLocator
+    .locator(".item.product.product-item")
+    .all();
 
   // Select and compare the second product
-  const selectedProduct2 = selectRandomProduct(itemListAfterReload);
-  const productName2 = await (
-    await selectedProduct2.$(".product-item-link")
-  ).innerText();
+  const selectedProduct2 = await selectRandomProduct(childElementsReload);
+  const productName2 = await selectedProduct2
+    .locator(".product-item-link")
+    .innerText();
   productsName.push(productName2);
   await hoverAndCompare(selectedProduct2);
 
@@ -52,11 +57,13 @@ test("Simple Compare 2 items", async ({ page }) => {
   // Navigate to the Compare Products page
   await page.locator("//a[@title='Compare Products']").click();
 
-  const listProductsComparePage = await page.$$(".cell.product.info");
+  const listProductsComparePage = await page.locator(".cell.product.info");
+  const productsNamePage = await listProductsComparePage
+    .locator(".product-item-name")
+    .all();
 
-  for (const product of listProductsComparePage) {
-    const productNamePage = await product.$(".product-item-name");
-    const productNameText = await productNamePage.innerText();
+  for (const product of productsNamePage) {
+    const productNameText = await product.innerText();
     expect(productsName).toContain(productNameText);
   }
 });
