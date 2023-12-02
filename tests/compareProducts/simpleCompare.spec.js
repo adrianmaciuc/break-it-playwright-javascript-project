@@ -13,57 +13,34 @@ test("Simple Compare 2 items", async ({ page }) => {
   async function hoverAndCompare(product) {
     await product.hover();
     await page.waitForTimeout(1500);
-    await product.locator(".action.tocompare").click();
+    await product.getByTitle("Add to Compare").click();
   }
 
-  const parentLocator = await page.locator(
-    ".products.list.items.product-items"
-  );
-  const childElements = await parentLocator
-    .locator(".item.product.product-item")
-    .all();
-  const productsName = [];
+  const allProducts = await page.locator(".product-item").all();
 
-  // Select and compare the first product
-  const selectedProduct1 = selectRandomProduct(childElements);
-  const productName = await selectedProduct1
-    .locator(".product-item-link")
-    .innerText();
-  productsName.push(productName);
+  // Select the first product to compare
+  const selectedProduct1 = await selectRandomProduct(allProducts);
+  const selectedProduct1Details = await selectedProduct1
+    .locator(".product-item-name")
+    .textContent();
   await hoverAndCompare(selectedProduct1);
 
-  // Get the product list after the reload
-  await parentLocator.waitFor();
-  const childElementsReload = await parentLocator
-    .locator(".item.product.product-item")
-    .all();
-
-  // Select and compare the second product
-  const selectedProduct2 = await selectRandomProduct(childElementsReload);
-  const productName2 = await selectedProduct2
-    .locator(".product-item-link")
-    .innerText();
-  productsName.push(productName2);
+  // Select the second product to compare
+  const selectedProduct2 = await selectRandomProduct(allProducts);
+  const selectedProduct2Details = await selectedProduct2
+    .locator(".product-item-name")
+    .textContent();
   await hoverAndCompare(selectedProduct2);
 
-  await page.waitForSelector(
-    "//span[@data-bind='text: compareProducts().countCaption']"
-  );
-  const numberOfProductsCompare = await page
-    .locator("//span[@data-bind='text: compareProducts().countCaption']")
-    .textContent();
-  expect(numberOfProductsCompare).toContain("2");
+  // check if products are added to compare
+  await expect(page.getByTitle("Compare Products")).toBeVisible();
+  await expect(page.getByTitle("Compare Products")).toContainText("2");
+  await page.getByTitle("Compare Products").click();
 
-  // Navigate to the Compare Products page
-  await page.locator("//a[@title='Compare Products']").click();
-
-  const listProductsComparePage = await page.locator(".cell.product.info");
-  const productsNamePage = await listProductsComparePage
+  // verify that items in compare have the same details as initial selection
+  const itemsInComparePage = await page
     .locator(".product-item-name")
-    .all();
-
-  for (const product of productsNamePage) {
-    const productNameText = await product.innerText();
-    expect(productsName).toContain(productNameText);
-  }
+    .allTextContents();
+  await expect(itemsInComparePage).toContain(selectedProduct1Details);
+  await expect(itemsInComparePage).toContain(selectedProduct2Details);
 });
