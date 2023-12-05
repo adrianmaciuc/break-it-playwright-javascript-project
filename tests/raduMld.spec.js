@@ -23,15 +23,9 @@ test("Select random products from home page", async ({ page }) => {
   await randomProduct.click();
 
   const pageTitle = await page.locator(".product-info-main .base").innerText();
-  let matchFound = false;
   for (let i = 0; i < pageTitles.length; i++) {
     if (pageTitle === pageTitles[i]) {
-      console.log(`The home title name ${pageTitles[i]} is the same as product title name ${pageTitle}`);
-      matchFound = true;
-      break;
+      expect(pageTitle).toEqual(pageTitles[i]);
     }
-  }
-  if (!matchFound) {
-  console.log(`The home title name is not the same as product title name`);
   }
 });
