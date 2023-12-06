@@ -11,7 +11,6 @@ test('intercept', async ({ page }) => {
 
   const respRes = await response.json();
   const object = respRes['compare-products']['items'][0];
-  console.log(object.id);
   expect(object.id).toBeDefined();
 
   await page.waitForSelector('[data-ui-id="message-success"]');
