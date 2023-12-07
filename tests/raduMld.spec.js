@@ -20,11 +20,6 @@ test("Select random products from home page", async ({ page }) => {
   const randomProduct = numberOfProducts[Math.floor(Math.random() * numberOfProducts.length)];
   const pageTitles = await page.locator(".product-item-link").allInnerTexts();
   await randomProduct.click();
-
   const pageTitle = await page.locator(".product-info-main .base").innerText();
-  for (let i = 0; i < pageTitles.length; i++) {
-    if (pageTitle === pageTitles[i]) {
-      expect(pageTitle).toEqual(pageTitles[i]);
-    }
-  }
+  expect(pageTitles).toContain(pageTitle);
 });
