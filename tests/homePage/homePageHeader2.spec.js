@@ -29,7 +29,7 @@ test('Search suggestion in header', async ({ page }) => {
 test('Logo click redirect home page', async ({ page }) => {
   await page.goto(HomePageUrl);
   await page.getByLabel('store logo').click();
-  expect(page.url()).toEqual(HomePageUrl);
+  await expect(page.url()).toEqual(HomePageUrl);
 });
 
 test('Click on cart is empty', async ({ page }) => {
