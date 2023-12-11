@@ -11,26 +11,21 @@ const pagination = ".items.pages-items";
 test("Search in header for pants", async ({ page }) => {
   await page.goto(homePageUrl);
 
-  // Enter "pants" and get sugestions
   await page
     .getByPlaceholder(searchBar)
     .pressSequentially("pants", { delay: 300 });
   await expect(page.locator(elementsList)).toBeVisible();
-  const sugestionList = await page.locator(searchItems).all();
+  const sugestionList = await page.locator(searchItems).allInnerTexts();
 
-  // Get sugestions
-  let sugestions = [];
-  for (let sugestion of sugestionList) {
-    sugestions.push(await sugestion.innerText());
-  }
+  await expect(sugestionList).toContain("pants for women");
 
-  await expect(sugestions).toContain("pants for women");
-
-  const sugestionAmount = await page
-    .locator(`#qs-option-${sugestions.indexOf("pants for women")}`)
+  const optionPantsForWomen = await page
+    .getByRole("option", {
+      hasText: "pants for women",
+    })
     .locator(amount)
-    .innerText();
-  await expect(sugestionAmount).toBe("25");
+    .allInnerTexts();
+  await expect(optionPantsForWomen).toContain("25");
 });
 
 test("Search in header for tees for man", async ({ page }) => {
@@ -42,7 +37,6 @@ test("Search in header for tees for man", async ({ page }) => {
     .pressSequentially("tee", { delay: 300 });
 
   await page.locator(searchItems).getByText("tee for man").click();
-  await page.waitForTimeout(1000);
 
   await expect(await page.locator(products)).toHaveCount(12);
 
@@ -50,10 +44,9 @@ test("Search in header for tees for man", async ({ page }) => {
   const pagesCount = await page
     .locator(pagination)
     .first()
-    .locator(".item")
-    .locator(".page")
+    .locator(".item .page")
     .all();
-  await expect(pagesCount.length).toBe(4);
+  await expect(pagesCount).toHaveLength(4);
 });
 
 test("Search in header for tees", async ({ page }) => {
@@ -67,7 +60,6 @@ test("Search in header for tees", async ({ page }) => {
   await page.locator(searchItems).getByText("tees").first().click();
   await page.waitForTimeout(1000);
 
-  await expect((await page.locator(products).all()).length).toBe(3);
-
-  await expect(await page.locator(pagination)).toHaveCount(0);
+  await expect(await page.locator(products).all()).toHaveLength(3);
+  await expect(await page.locator(pagination)).not.toBeVisible(0);
 });
