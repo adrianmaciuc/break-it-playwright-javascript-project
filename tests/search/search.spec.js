@@ -31,7 +31,6 @@ test("Search in header for pants", async ({ page }) => {
 test("Search in header for tees for man", async ({ page }) => {
   await page.goto(homePageUrl);
 
-  // Enter "tee" and click on desired sugestion
   await page
     .getByPlaceholder(searchBar)
     .pressSequentially("tee", { delay: 300 });
@@ -40,7 +39,6 @@ test("Search in header for tees for man", async ({ page }) => {
 
   await expect(await page.locator(products)).toHaveCount(12);
 
-  // Get number of pages
   const pagesCount = await page
     .locator(pagination)
     .first()
@@ -52,7 +50,6 @@ test("Search in header for tees for man", async ({ page }) => {
 test("Search in header for tees", async ({ page }) => {
   await page.goto(homePageUrl);
 
-  // Enter "tee" and click on desired sugestion
   await page
     .getByPlaceholder(searchBar)
     .pressSequentially("tee", { delay: 300 });
@@ -61,5 +58,5 @@ test("Search in header for tees", async ({ page }) => {
   await page.waitForTimeout(1000);
 
   await expect(await page.locator(products).all()).toHaveLength(3);
-  await expect(await page.locator(pagination)).not.toBeVisible(0);
+  await expect(await page.locator(pagination)).not.toBeVisible();
 });
