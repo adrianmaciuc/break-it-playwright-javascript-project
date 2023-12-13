@@ -24,16 +24,9 @@ test('Search suggestion in header', async ({ page }) => {
       ignoreCase: true,
     });
   }
-});
 
-test('Logo click redirect home page', async ({ page }) => {
-  await page.goto(HomePageUrl);
   await page.getByLabel('store logo').click();
   await expect(page.url()).toEqual(HomePageUrl);
-});
-
-test('Click on cart is empty', async ({ page }) => {
-  await page.goto(HomePageUrl);
 
   await page.waitForTimeout(1000);
 
