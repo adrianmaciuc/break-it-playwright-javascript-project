@@ -13,11 +13,11 @@ test("Count products on the home page", async ({ page }) => {
   await expect(numberOfProducts).toBe(6);
 });
 
-
 test("Select random products from home page", async ({ page }) => {
   await page.goto("https://magento.softwaretestingboard.com/");
   const numberOfProducts = await page.locator(".product-item").all();
-  const randomProduct = numberOfProducts[Math.floor(Math.random() * numberOfProducts.length)];
+  const randomProduct =
+    numberOfProducts[Math.floor(Math.random() * numberOfProducts.length)];
   const pageTitles = await page.locator(".product-item-link").allInnerTexts();
   await randomProduct.click();
   const pageTitle = await page.locator(".product-info-main .base").innerText();
