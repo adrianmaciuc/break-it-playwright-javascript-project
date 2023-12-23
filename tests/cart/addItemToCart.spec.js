@@ -1,13 +1,14 @@
 import { test, expect } from '@playwright/test';
 const HomePageUrl = 'https://magento.softwaretestingboard.com/';
 
-test('Navigate to top tees', async ({ page }) => {
+test('Add item to cart', async ({ page }) => {
   await page.goto(HomePageUrl);
   await page.waitForTimeout(1000);
-  await page.locator('#ui-id-5').hover();
-  await page.locator('#ui-id-17').hover();
-  await page.locator('#ui-id-21').click();
+  await page.getByTestId('ui-id-5').hover();
+  await page.getByTestId('ui-id-17').hover();
+  await page.getByTestId('ui-id-21').click();
 
+  await page.waitForTimeout(1000);
   await expect(page.url()).toEqual(
     'https://magento.softwaretestingboard.com/men/tops-men/tees-men.html'
   );
@@ -26,7 +27,7 @@ test('Navigate to top tees', async ({ page }) => {
   const selectOptionsForProduct = async (size, color, quantity) => {
     await page.getByLabel(size).click();
     await page.getByLabel(color).click();
-    await page.locator('#qty').fill(quantity);
+    await page.getByTestId('qty').fill(quantity);
   };
 
   await selectOptionsForProduct('XL', 'Green', '3');
