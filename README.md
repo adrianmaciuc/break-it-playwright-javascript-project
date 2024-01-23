@@ -13,15 +13,11 @@ This is a project created by the members of Bug Hunter discord server.
 We estimate that our project will be done in about 2-3 months.
 
 ## Contributors
-- [Andu Tutoveanu](https://github.com/AnduTutoveanu09)
 - [Alex Stefan](https://github.com/AlexStefan17)
 - [Levi - Simon Levente-Attila](https://github.com/simonleventeattila)
 - [Radu Moldovan](https://github.com/RaduMoldovan30)
-- [Iulian Neaga](https://github.com/Iulian99)
-- [Andreea Hasel](https://github.com/AndreeaHasel)
 - [Adrian Maciuc](https://github.com/adrianmaciuc)
 - [Dan Popescu](https://github.com/PopDan23)
-- [Ema Emese Egeto](https://github.com/emese85)
 - [Claudiu Iacob](https://github.com/iclaudiu98)
 - [Adrian Ciuciui](https://github.com/AdrianCiuciui)
 - [Mirel Palii](https://github.com/pmirel)
