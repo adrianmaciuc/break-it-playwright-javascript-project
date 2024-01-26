@@ -6,7 +6,8 @@ export class HomePage {
   }
 
   // locators
-  whatIsNewBTN = () => this.page.locator("#ui-id-3")
+  whatIsNewBTN = () => this.page.locator("#ui-id-3");
+  hotSellersProducts = () => this.page.locator(".product-item");
 
   async navigateToHomePage() {
     await this.page.goto(this.homePageUrl);

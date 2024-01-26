@@ -1,9 +1,10 @@
 import { test, expect } from "@playwright/test";
+import { HomePage } from '../../pages/home.page';
 
 test("Six items displayed at hot sellers", async ({ page }) => {
-  await page.goto("https://magento.softwaretestingboard.com/");
-  const productItems = await page.$$(".product-item");
-  expect(productItems).toHaveLength(6);
+  const homePage = new HomePage(page)
+  await homePage.navigateToHomePage();
+  expect(homePage.hotSellersProducts()).toHaveCount(6);
 });
 
 test("Item redirects correctly on home page", async ({ page }) => {
