@@ -1,15 +1,12 @@
 import { test, expect } from "@playwright/test";
 
-test("Get", async ({ request }) => {
-  const response = await await request.get(
-    "https://martioli.com/apifortesting"
-  );
-  expect(response.ok()).toBeTruthy();
-  const data = await response.json();
-});
+test("CRUD Operations", async ({ request }) => {
+  // GET
+  const getResponse = await request.get("https://martioli.com/apifortesting");
+  expect(getResponse.ok()).toBeTruthy();
+  const initialData = await getResponse.json();
 
-let id;
-test("CREATE", async ({ request }) => {
+  // CREATE
   const newData = {
     developer: "Imaginatie",
     QA: "Distrugere",
@@ -19,29 +16,26 @@ test("CREATE", async ({ request }) => {
     story_points: 10,
   };
 
-  const response = await request.post("https://martioli.com/apifortesting", {
+  const createResponse = await request.post("https://martioli.com/apifortesting", {
     data: newData,
   });
-  expect(response.ok()).toBeTruthy();
-  const data = await response.json();
-  id = data.id;
-  expect(data.QA).toBe(newData.QA);
-});
+  expect(createResponse.ok()).toBeTruthy();
+  const createdData = await createResponse.json();
+  expect(createdData.QA).toBe(newData.QA);
 
-test("PATCH", async ({ request }) => {
-  const dataChange = { QA: "Testarica", task: "distrugeti" };
-  const response = await request.patch(
-    `https://martioli.com/apifortesting/id/${id}`,
-    { data: dataChange }
+  // PATCH
+  const dataChangePatch = { QA: "Testarica", task: "distrugeti" };
+  const patchResponse = await request.patch(
+    `https://martioli.com/apifortesting/id/${createdData.id}`,
+    { data: dataChangePatch }
   );
-  expect(response.ok()).toBeTruthy();
-  const data = await response.json();
-  expect(data.QA).toBe(dataChange.QA);
-  expect(data.task).toBe(dataChange.task);
-});
+  expect(patchResponse.ok()).toBeTruthy();
+  const patchedData = await patchResponse.json();
+  expect(patchedData.QA).toBe(dataChangePatch.QA);
+  expect(patchedData.task).toBe(dataChangePatch.task);
 
-test("PUT", async ({ request }) => {
-  const dataChange = {
+  // PUT
+  const dataChangePut = {
     developer: "Ghita",
     QA: "Developer-ul",
     manager: "Angajam",
@@ -49,19 +43,18 @@ test("PUT", async ({ request }) => {
     task: "Proiect bun",
     story_points: 10,
   };
-  const response = await request.put(
-    `https://martioli.com/apifortesting/id/${id}`,
-    { data: dataChange }
+  const putResponse = await request.put(
+    `https://martioli.com/apifortesting/id/${createdData.id}`,
+    { data: dataChangePut }
   );
-  expect(response.ok()).toBeTruthy();
-  const data = await response.json();
-  expect(data.QA).toBe(dataChange.QA);
-  expect(data.task).toBe(dataChange.task);
-});
+  expect(putResponse.ok()).toBeTruthy();
+  const putData = await putResponse.json();
+  expect(putData.QA).toBe(dataChangePut.QA);
+  expect(putData.task).toBe(dataChangePut.task);
 
-test("DELETE", async ({ request }) => {
-  const response = await request.delete(
-    `https://martioli.com/apifortesting/id/${id}`
+  // DELETE
+  const deleteResponse = await request.delete(
+    `https://martioli.com/apifortesting/id/${createdData.id}`
   );
-  expect(response.ok()).toBeTruthy();
+  expect(deleteResponse.ok()).toBeTruthy();
 });
