@@ -1,7 +1,7 @@
 import { test, expect } from "@playwright/test";
 import { HomePage } from "../../pages/home.page";
 import { ProductDetails } from "../../pages/product.details";
-import { navigateToHomePageGenerateRandomNumber } from "../../helpers/utils";
+import { getRandomNumber } from "../../helpers/utils";
 
 test("Six items displayed at hot sellers", async ({ page }) => {
   const homePage = new HomePage(page);
@@ -14,14 +14,12 @@ test("Item redirects correctly on home page", async ({ page }) => {
   const productDetails = new ProductDetails(page);
 
   await homePage.navigateToHomePage();
-
-  const randomProductIndex = await navigateToHomePageGenerateRandomNumber(
-    homePage,
+  const randomNumber = await getRandomNumber(
     await homePage.getNumberOfHotSellers()
   );
 
-  const productName = await homePage.getNameOfHotSeller(randomProductIndex);
-  await homePage.clickOnHotSellerProduct(randomProductIndex);
+  const productName = await homePage.getNameOfHotSeller(randomNumber);
+  await homePage.clickOnHotSellerProduct(randomNumber);
   const productName2 = await productDetails.getProductName();
   expect(productName).toContain(productName2);
 });

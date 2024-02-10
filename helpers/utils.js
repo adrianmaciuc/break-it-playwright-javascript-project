@@ -5,7 +5,6 @@ import { HomePage } from "../pages/home.page";
  * @param {number} max - The upper limit for the random number.
  * @returns {Promise<number>} - A promise that resolves to a random number.
  */
-export async function navigateToHomePageGenerateRandomNumber(homePage, max) {
-  await homePage.navigateToHomePage();
+export async function getRandomNumber(max) {
   return Math.floor(Math.random() * max);
 }
