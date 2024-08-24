@@ -1,8 +1,11 @@
+import { APP_URL } from './constants';
+
+
 export class HomePage {
 
   constructor(page) {
     this.page = page;
-    this.homePageUrl = 'https://magento.softwaretestingboard.com/';
+    this.homePageUrl = APP_URL;
   }
 
   // locators
@@ -11,5 +14,5 @@ export class HomePage {
   async navigateToHomePage() {
     await this.page.goto(this.homePageUrl);
   }
-}
 
+}
